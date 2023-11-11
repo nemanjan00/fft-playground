@@ -1,0 +1,17 @@
+{
+  "name": "fft-playground",
+  "version": "0.0.0",
+  "description": "FFT Playground",
+  "main": "index.js",
+  "repository": "git@github.com:nemanjan00/fft-playground.git",
+  "author": "Nemanja Nedeljkovic <nemanjan00@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "vite": "^4.5.0"
+  },
+  "dependencies": {
+    "fft-js": "^0.0.12",
+    "p5": "^1.8.0"
+  }
+}
