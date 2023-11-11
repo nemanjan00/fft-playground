@@ -5,8 +5,8 @@ let checkbox;
 let offset = 0;
 let slider;
 
-let globalMin = 0;
-let globalMax = 0
+let globalMin = Infinity;
+let globalMax = Infinity
 
 const sketch = (s) => {
 	s.setup = () => {
@@ -39,7 +39,7 @@ const sketch = (s) => {
 		const points = Array(size).fill(true).map((_, x) => {
 			const point = {
 				x: x / 2,
-				y: Math.sin((x + offset) / slider.value()) * 100
+				y: Math.cos((x + offset) / slider.value()) * 100
 			};
 
 			return point;
@@ -48,10 +48,12 @@ const sketch = (s) => {
 		const phasors = fft(points.map(point => point.y));
 
 		points.forEach(point => {
-			s.point(point.x * 2 + 200, point.y + 200);
+			s.point(point.x * 2 + 200, point.y * -1 + 200);
 		});
 
 		const graph = phasors.map(p => p[+!document.querySelector("input[type='checkbox']").checked]);
+
+		//const graph = phasors.map(p => Math.sqrt(p[0]*p[0] + p[1]*p[1]));
 
 		const min = graph.reduce((prev, cur) => {
 			if(prev > cur) {
@@ -87,7 +89,7 @@ const sketch = (s) => {
 
 				const p = graph[fullX] * diff + ((graph[fullX + 1] || graph[fullX]) * (1 - diff));
 
-				s.point(200 + x * 2 / 200, 400 + ((p - globalMin) / scale) * 200);
+				s.point(200 + x * 2 / 200, 600 + ((p - globalMin) / scale) * -200);
 			});
 	}
 
